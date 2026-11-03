@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 240" width="100%" height="100%">
+  <defs>
+    <!-- Filtro de sombra suave para la curva inferior -->
+    <filter id="soft-shadow" x="-10%" y="-10%" width="130%" height="150%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5" />
+      <feOffset dx="4" dy="12" result="offsetblur" />
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3" />
+      </feComponentTransfer>
+      <feMerge> 
+        <feMergeNode />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Gradiente corporativo verde Holidays -->
+    <linearGradient id="holidaysGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#69b42e" />
+      <stop offset="50%" stop-color="#73bd27" />
+      <stop offset="100%" stop-color="#62ab21" />
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(10, 15)">
+    <!-- Curva / Swoosh inferior con sombra -->
+    <path d="M 60,140 Q 180,165 240,150 Q 280,140 295,95 Q 260,145 190,150 Q 120,155 60,140 Z" 
+          fill="url(#holidaysGrad)" filter="url(#soft-shadow)" />
+
+    <!-- Figura humana dinámica (cabeza y brazos elevados) -->
+    <!-- Cabeza -->
+    <circle cx="282" cy="62" r="14" fill="#73bd27" />
+    <!-- Cuerpo y brazos de triunfo -->
+    <path d="M 265,58 C 255,42 270,35 273,45 C 276,55 281,72 284,80 C 288,72 292,53 296,44 C 300,34 315,43 303,58 C 293,72 289,88 290,105 C 285,112 278,110 277,100 C 275,86 273,73 265,58 Z" 
+          fill="#73bd27" />
+
+    <!-- Texto "Holidays" estilizado con curvas redondeadas -->
+    <text x="50" y="130" 
+          font-family="'Inter', 'Montserrat', 'Segoe UI', system-ui, sans-serif" 
+          font-size="82" 
+          font-weight="900" 
+          letter-spacing="-2px"
+          fill="url(#holidaysGrad)">
+      Holidays
+    </text>
+  </g>
+</svg>

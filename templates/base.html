@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Holidays - Plataforma Segura{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/logo.svg') }}">
+</head>
+<body>
+
+  <!-- Barra Superior de Controles (Toggle de Seguridad y Tema Claro / Oscuro) -->
+  <header class="app-topbar">
+    <div class="banner-controls">
+      <!-- Botón para alternar el modo de seguridad -->
+      <a href="{{ url_for('toggle_security') }}" class="btn-toggle-security" title="Alternar entre modo vulnerable y mitigado">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <span>Cambiar a {{ 'Modo Vulnerable' if is_secure else 'Modo Seguro' }}</span>
+      </a>
+
+      <!-- Selector de Tema Claro / Oscuro -->
+      <button type="button" id="themeToggleBtn" class="theme-toggle-btn" aria-label="Cambiar tema" title="Alternar Modo Claro / Oscuro">
+        <span id="themeIcon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main class="app-wrapper">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Modal Simulado de Proveedores OAuth -->
+  <div id="socialModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <h3 id="modalTitle" style="font-size: 1.2rem; margin-bottom: 10px; color: var(--text-main);">
+        Autenticación con <span id="modalProviderName">Social</span>
+      </h3>
+      <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 20px;">
+        Este botón simula la federación de identidades mediante protocolo OAuth 2.0 / OpenID Connect. En entornos de producción redirige al proveedor corporativo para validar el consentimiento de acceso.
+      </p>
+      <button type="button" id="modalCloseBtn" class="btn-primary" style="margin-top: 0;">
+        <span class="btn-text">Entendido</span>
+      </button>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Verificación de Cuenta - Holidays{% endblock %}
+
+{% block content %}
+<section class="auth-container">
+
+  <div class="auth-header">
+    <div class="brand-logo-container">
+      <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logotipo Holidays" class="brand-logo">
+    </div>
+    <h1 class="auth-title">Verificación de Cuenta</h1>
+    <p class="auth-subtitle">Confirma tu identidad para habilitar el acceso total al portal</p>
+  </div>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert-box alert-{{ category }}" role="alert">
+          <span>{{ message }}</span>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <div style="background-color: var(--bg-card-subtle); padding: 16px; border-radius: var(--radius-sm); margin-bottom: 20px; font-size: 0.875rem;">
+    <p style="margin-bottom: 8px;"><strong>Estado actual:</strong> Pendiente de verificación por correo electrónico.</p>
+    <p style="color: var(--text-muted);">Hemos enviado un código token a tu dirección de correo registrada. Puedes verificar tu cuenta ingresando el código de 6 dígitos suministrado.</p>
+  </div>
+
+  <form action="{{ url_for('verificar_cuenta') }}" method="POST">
+    <div class="form-group">
+      <label for="verificationCode" class="form-label">Código de Verificación (6 dígitos)</label>
+      <input type="text" id="verificationCode" name="code" class="form-control no-icon" placeholder="123456" maxlength="6" required style="letter-spacing: 4px; font-size: 1.1rem; text-align: center;">
+    </div>
+
+    <button type="submit" class="btn-primary">
+      <span class="spinner" aria-hidden="true"></span>
+      <span class="btn-text">Confirmar y Activar</span>
+    </button>
+  </form>
+
+  <div class="auth-footer">
+    <a href="{{ url_for('login') }}">← Volver al inicio de sesión</a>
+  </div>
+
+</section>
+{% endblock %}

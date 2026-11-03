@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Crear Cuenta - Holidays Travel & Tourism{% endblock %}
+
+{% block content %}
+<section class="auth-container">
+
+  <div class="auth-header">
+    <div class="brand-logo-container">
+      <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logotipo Holidays" class="brand-logo">
+    </div>
+    <h1 class="auth-title">Crear Cuenta</h1>
+    <p class="auth-subtitle">Únete a Holidays y accede a beneficios exclusivos de viaje</p>
+  </div>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert-box alert-{{ category }}" role="alert">
+          <span>{{ message }}</span>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form action="{{ url_for('registro') }}" method="POST" id="registerForm">
+    <!-- Nombre Completo -->
+    <div class="form-group">
+      <label for="fullName" class="form-label">Nombre Completo</label>
+      <input type="text" id="fullName" name="full_name" class="form-control no-icon" placeholder="ej. María Morales" required>
+    </div>
+
+    <!-- Nombre de Usuario -->
+    <div class="form-group">
+      <label for="username" class="form-label">Nombre de Usuario</label>
+      <input type="text" id="username" name="username" class="form-control no-icon" placeholder="ej. maria_viajes" required>
+    </div>
+
+    <!-- Correo Electrónico -->
+    <div class="form-group">
+      <label for="email" class="form-label">Correo Electrónico</label>
+      <input type="email" id="email" name="email" class="form-control no-icon" placeholder="maria@ejemplo.com" required>
+    </div>
+
+    <!-- Contraseña -->
+    <div class="form-group">
+      <label for="regPassword" class="form-label">Contraseña</label>
+      <div class="input-container">
+        <input type="password" id="regPassword" name="password" class="form-control no-icon" placeholder="Mínimo 8 caracteres" required>
+        <button type="button" class="toggle-password-btn" data-target="regPassword" aria-label="Mostrar contraseña">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Confirmar Contraseña -->
+    <div class="form-group">
+      <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+      <div class="input-container">
+        <input type="password" id="confirmPassword" name="confirm_password" class="form-control no-icon" placeholder="Repite la contraseña" required>
+        <button type="button" class="toggle-password-btn" data-target="confirmPassword" aria-label="Mostrar contraseña">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </button>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-primary">
+      <span class="spinner" aria-hidden="true"></span>
+      <span class="btn-text">Registrar Cuenta</span>
+    </button>
+  </form>
+
+  <div class="auth-footer">
+    ¿Ya posees una cuenta registrada? 
+    <a href="{{ url_for('login') }}">Inicia sesión</a>
+  </div>
+
+</section>
+{% endblock %}

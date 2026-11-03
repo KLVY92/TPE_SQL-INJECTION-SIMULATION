@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Recuperar Contraseña - Holidays{% endblock %}
+
+{% block content %}
+<section class="auth-container">
+
+  <div class="auth-header">
+    <div class="brand-logo-container">
+      <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logotipo Holidays" class="brand-logo">
+    </div>
+    <h1 class="auth-title">Recuperación</h1>
+    <p class="auth-subtitle">Ingresa tu correo o usuario y te enviaremos instrucciones de restablecimiento</p>
+  </div>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert-box alert-{{ category }}" role="alert">
+          <span>{{ message }}</span>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form action="{{ url_for('recuperar_password') }}" method="POST">
+    <div class="form-group">
+      <label for="recoveryInput" class="form-label">Correo electrónico o usuario registrado</label>
+      <input type="text" id="recoveryInput" name="recovery_input" class="form-control no-icon" placeholder="ej. turista01@holidays.com" required>
+    </div>
+
+    <button type="submit" class="btn-primary">
+      <span class="spinner" aria-hidden="true"></span>
+      <span class="btn-text">Enviar Enlace Seguro</span>
+    </button>
+  </form>
+
+  <div class="auth-footer">
+    <a href="{{ url_for('login') }}">← Volver al inicio de sesión</a>
+  </div>
+
+</section>
+{% endblock %}
